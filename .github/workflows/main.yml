@@ -19,15 +19,18 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Extract ZIP
+        run: unzip morphmod-fabric-1.21.1.zip
+
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+        run: chmod +x morph-mod/gradlew
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: cd morph-mod && ./gradlew build
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
           name: morphmod-jar
-          path: build/libs/morphmod-*.jar
+          path: morph-mod/build/libs/morphmod-*.jar
           if-no-files-found: error
